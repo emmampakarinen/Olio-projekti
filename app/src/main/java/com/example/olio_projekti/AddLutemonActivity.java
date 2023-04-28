@@ -92,7 +92,7 @@ public class AddLutemonActivity extends AppCompatActivity {
                         break;
                 }
 
-                Storage.getInstance().addLutemon(new Black(name, color, attack, defense, maxHealth, selected_photo));
+                Home.getInstance().createLutemon(new Black(name, color, attack, defense, maxHealth, selected_photo));
                 break;
             case R.id.rbGreen:
                 color = "Green";
@@ -109,7 +109,7 @@ public class AddLutemonActivity extends AppCompatActivity {
                         break;
                 }
 
-                Storage.getInstance().addLutemon(new Green(name, color, attack, defense, maxHealth, selected_photo));
+                Home.getInstance().createLutemon(new Green(name, color, attack, defense, maxHealth, selected_photo));
                 break;
             case R.id.rbPink:
                 color = "Pink";
@@ -126,7 +126,7 @@ public class AddLutemonActivity extends AppCompatActivity {
                         break;
                 }
 
-                Storage.getInstance().addLutemon(new Pink(name, color, attack, defense, maxHealth, selected_photo));
+                Home.getInstance().createLutemon(new Pink(name, color, attack, defense, maxHealth, selected_photo));
                 break;
             case R.id.rbOrange:
                 color = "Orange";
@@ -143,7 +143,7 @@ public class AddLutemonActivity extends AppCompatActivity {
                         break;
                 }
 
-                Storage.getInstance().addLutemon(new White(name, color, attack, defense, maxHealth, selected_photo));
+                Home.getInstance().createLutemon(new White(name, color, attack, defense, maxHealth, selected_photo));
                 break;
             case R.id.rbBlack:
                 color = "Black";
@@ -160,7 +160,7 @@ public class AddLutemonActivity extends AppCompatActivity {
                         break;
                 }
 
-                Storage.getInstance().addLutemon(new Orange(name, color, attack, defense, maxHealth, selected_photo));
+                Storage.getInstance().addLutemonTo(Location.HOME, new Orange(name, color, attack, defense, maxHealth, selected_photo));
                 break;
         }
     }

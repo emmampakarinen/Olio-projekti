@@ -7,42 +7,17 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btnAddLutemon"
-        android:layout_width="218dp"
-        android:layout_height="81dp"
-        android:onClick="switchToAddNewLutemon"
-        android:text="Add new Lutemon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.09" />
-
-    <Button
-        android:id="@+id/btnListLutemons"
+        android:id="@+id/btnStatistics"
         android:layout_width="217dp"
         android:layout_height="80dp"
-        android:onClick="switchToListLutemons"
-        android:text="List Lutemons"
+        android:onClick="switchToStatistics"
+        android:text="lutemon statistics"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.269" />
-
-    <Button
-        android:id="@+id/btnMoveLutemons"
-        android:layout_width="217dp"
-        android:layout_height="80dp"
-        android:onClick="switchToMoveLutemons"
-        android:text="Move Lutemons"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.46" />
+        app:layout_constraintVertical_bias="0.701" />
 
     <Button
         android:id="@+id/btnBattlefield"
@@ -52,8 +27,77 @@
         android:text="Enter battlefield"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.655" />
+        app:layout_constraintVertical_bias="0.528" />
+
+    <Button
+        android:id="@+id/btnSaveLutemons"
+        android:layout_width="171dp"
+        android:layout_height="59dp"
+        android:backgroundTint="#CE93D8"
+        android:onClick="saveLutemons"
+        android:text="Save created lutemons"
+        app:iconTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <Button
+        android:id="@+id/btnLoadLutemons"
+        android:layout_width="171dp"
+        android:layout_height="59dp"
+        android:backgroundTint="#CE93D8"
+        android:onClick="loadLutemons"
+        android:text="Load previously saved Lutemons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.933"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <Button
+        android:id="@+id/btnListLutemons"
+        android:layout_width="217dp"
+        android:layout_height="80dp"
+        android:onClick="switchToListLutemons"
+        android:text="List Lutemons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.196" />
+
+    <Button
+        android:id="@+id/btnMoveLutemons"
+        android:layout_width="217dp"
+        android:layout_height="80dp"
+        android:onClick="switchToMoveLutemons"
+        android:text="Move Lutemons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.362" />
+
+    <Button
+        android:id="@+id/btnAddLutemon"
+        android:layout_width="218dp"
+        android:layout_height="81dp"
+        android:onClick="switchToAddNewLutemon"
+        android:text="Add new Lutemon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.033" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

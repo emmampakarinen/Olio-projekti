@@ -1,7 +1,10 @@
 package com.example.olio_projekti;
 
+import java.util.ArrayList;
+
 public class Spa extends Storage {
     private static Spa spa = null;
+    protected ArrayList<Lutemon> SpaLutemons = new ArrayList<>();
     private Spa() {}
 
     public static Spa getInstance() {
@@ -10,8 +13,23 @@ public class Spa extends Storage {
         }
         return spa;
     }
-    public void spaTreatment(Lutemon lutemon) {
+
+    private void spaTreatment(Lutemon lutemon) {
         lutemon.setHealthToMax(lutemon.getMaxHealth());
+    }
+
+
+    public void leaveSpa(Lutemon lutemon) {
+        spaTreatment(lutemon);
+        SpaLutemons.remove(lutemon);
+    }
+
+    public void addLutemon(Lutemon lutemon) {
+        SpaLutemons.add(lutemon);
+    }
+
+    public ArrayList<Lutemon> getLutemons() {
+        return SpaLutemons;
     }
 
 }

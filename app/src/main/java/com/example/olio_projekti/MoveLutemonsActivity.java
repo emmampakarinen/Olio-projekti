@@ -12,7 +12,7 @@ public class MoveLutemonsActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { // reference for fragments: https://www.youtube.com/watch?v=tPV8xA7m-iw&t=603s
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_move_lutemons);
 

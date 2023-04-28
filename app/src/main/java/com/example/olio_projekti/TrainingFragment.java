@@ -10,15 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TrainingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class TrainingFragment extends Fragment {
 
-
-    private Storage LutemonStorage;
     private RecyclerView rv;
 
     @Override
@@ -27,12 +21,11 @@ public class TrainingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_training, container, false);
 
-        LutemonStorage = Storage.getInstance();
 
         rv = view.findViewById(R.id.rvLutemonsTrainFrag);
 
         rv.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        rv.setAdapter(new LutemonFragmentListAdapter(view.getContext(), LutemonStorage.getTrainingLutemons(), this));
+        rv.setAdapter(new LutemonFragmentListAdapter(view.getContext(), Storage.getInstance().getLutemonsAt(Location.TRAINING), this));
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         rv.setLayoutManager(layoutManager);
 

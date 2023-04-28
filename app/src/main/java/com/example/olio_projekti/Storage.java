@@ -3,96 +3,111 @@ package com.example.olio_projekti;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class Storage {
-    //protected String name;
-    private static Storage storage = null;
-    private static int spaId = 0, trainId = 0, homeId = 0;
-    protected HashMap<Integer, Lutemon> AllLutemons = new HashMap<>();
-    protected ArrayList<Lutemon> HomeLutemons = new ArrayList<>();
-    protected ArrayList<Lutemon> TrainingLutemons = new ArrayList<>();
-    protected ArrayList<Lutemon> SpaLutemons = new ArrayList<>();
-    protected ArrayList<Lutemon> FightLutemons = new ArrayList<>();
-    
+public class Storage {
+    protected String name;
+    private static Storage s = null;
 
-    public void addLutemon(Lutemon lutemon) {
-        AllLutemons.put(lutemon.getId(), lutemon);
-        HomeLutemons.add(lutemon);
-        homeId = lutemon.getId();
+    protected Storage() {}
+
+    public static Storage getInstance() { // singleton
+        if (s == null) {
+            s = new Storage();
+        }
+        return s;
     }
 
-    public Lutemon getLutemon(int id) {
-        return AllLutemons.get(id);
+    public void addLutemonTo(Location location, Lutemon lutemon) {
+        if (location == Location.HOME) {
+            Home.getInstance().addLutemon(lutemon);
+        } else if (location == Location.SPA) {
+            Spa.getInstance().addLutemon(lutemon);
+        } else if (location == Location.TRAINING) {
+            TrainingArea.getInstance().addLutemon(lutemon);
+        } else if (location == Location.BATTLEFIELD) {
+            BattleField.getInstance().addLutemon(lutemon);
+        }
+        return;
     }
 
-    public void listLutemons() {
-        // kesken
+    public ArrayList<Lutemon> getLutemonsAt(Location location) {
+        ArrayList<Lutemon> lutemons = new ArrayList<>();
+        if (location == Location.HOME) {
+            lutemons = Home.getInstance().getLutemons();
+        } else if (location == Location.SPA) {
+            lutemons = Spa.getInstance().getLutemons();
+        } else if (location == Location.TRAINING) {
+            lutemons = TrainingArea.getInstance().getLutemons();
+        } else if (location == Location.BATTLEFIELD) {
+            lutemons = BattleField.getInstance().getLutemons();
+        }
+        return lutemons;
     }
 
-    public HashMap<Integer, Lutemon> getLutemons() {
-        return AllLutemons;
+    public ArrayList<Lutemon> getAllLutemons() {
+        ArrayList<Lutemon> lutemons = new ArrayList<>();
+        lutemons.addAll(Home.getInstance().getLutemons());
+        lutemons.addAll(Spa.getInstance().getLutemons());
+        lutemons.addAll(TrainingArea.getInstance().getLutemons());
+        lutemons.addAll(BattleField.getInstance().getLutemons());
+        return lutemons;
     }
 
-    public void moveToTraining(Lutemon lutemon) {
-        if (lutemon != null) {
-            TrainingLutemons.add(lutemon);
-            if (HomeLutemons.contains(lutemon)) {
-                HomeLutemons.remove(lutemon.getId());
-            } else if (SpaLutemons.contains(lutemon)) {
-                Spa.getInstance().spaTreatment(lutemon);
-                SpaLutemons.remove(lutemon.getId());
+    public void moveLutemon(Location from, Location to, Lutemon lutemon) {
+        removeLutemon(from, lutemon);
+        addLutemonTo(to, lutemon);
+        return;
+    }
+
+    public void removeLutemon(Location location, Lutemon lutemon) {
+        if (location == Location.HOME) {
+           Home.getInstance().leaveHome(lutemon);
+        } else if (location == Location.SPA) {
+            Spa.getInstance().leaveSpa(lutemon);
+        } else if (location == Location.TRAINING) {
+            TrainingArea.getInstance().leaveTrainingArea(lutemon);
+        } else if (location == Location.BATTLEFIELD) {
+            BattleField.getInstance().leaveBattleField(lutemon);
+        }
+        return;
+    }
+
+
+    public void saveLutemons(Context context) {
+        try {
+            ObjectOutputStream lutemonWriter = new ObjectOutputStream(context.openFileOutput("lutemons.data", Context.MODE_PRIVATE));
+            lutemonWriter.writeObject(getAllLutemons());
+            lutemonWriter.close();
+            Toast.makeText(context, "Saving Lutemons succeeded", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Toast.makeText(context, "Saving Lutemons failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void loadLutemons(Context context) {
+        try {
+            ArrayList<Lutemon> lutemons = new ArrayList<>();
+            ObjectInputStream lutemonReader = new ObjectInputStream(context.openFileInput("lutemons.data"));
+            lutemons = (ArrayList<Lutemon>) lutemonReader.readObject();
+            for (Lutemon l: lutemons) {
+                addLutemonTo(Location.HOME, l);
+                System.out.println("moi load");
             }
-        }
-
-    }
-
-    public void moveToSpa(Lutemon lutemon) {
-        if (lutemon != null) {
-            SpaLutemons.add(lutemon);
-            if (HomeLutemons.contains(lutemon)) {
-                HomeLutemons.remove(lutemon.getId());
-            } else if (TrainingLutemons.contains(lutemon)) {
-                TrainingLutemons.remove(lutemon.getId());
-            }
-        }
-
-    }
-
-    public void moveToHome(Lutemon lutemon) {
-        if (lutemon != null ) {
-            HomeLutemons.add(lutemon);
-            if (SpaLutemons.contains(lutemon)) {
-                Spa.getInstance().spaTreatment(lutemon);
-                SpaLutemons.remove(lutemon.getId());
-            } else if (TrainingLutemons.contains(lutemon)) {
-                TrainingArea.getInstance().train(lutemon);
-                TrainingLutemons.remove(lutemon.getId());
-            }
+            lutemonReader.close();
+            Toast.makeText(context, "Loading Lutemons succeeded", Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            Toast.makeText(context, "Lutemon-data empty", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Toast.makeText(context, "Loading Lutemons failed", Toast.LENGTH_SHORT).show();
+        } catch (ClassNotFoundException e) {
+            Toast.makeText(context, "Loading Lutemons failed", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void moveToBattlefield(Lutemon lutemon) {
-        if (lutemon != null ) {
-            FightLutemons.add(lutemon);
-            HomeLutemons.remove(lutemon.getId());
-        }
-    }
-
-    public ArrayList<Lutemon> getHomeLutemons() {
-        return HomeLutemons;
-    }
-
-    public ArrayList<Lutemon> getTrainingLutemons() {
-        return TrainingLutemons;
-    }
-
-    public ArrayList<Lutemon> getSpaLutemons() {
-        return SpaLutemons;
-    }
-
-    public ArrayList<Lutemon> getFightLutemons() {
-        return FightLutemons;
-    }
 }

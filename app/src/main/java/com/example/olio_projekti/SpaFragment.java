@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 
 public class SpaFragment extends Fragment {
-    private Storage LutemonStorage;
     private RecyclerView rv;
 
     @Override
@@ -21,12 +20,11 @@ public class SpaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_spa, container, false);
 
-        LutemonStorage = Storage.getInstance();
 
         rv = view.findViewById(R.id.rvSpaFrag);
 
         rv.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        rv.setAdapter(new LutemonFragmentListAdapter(view.getContext(), LutemonStorage.getSpaLutemons(), this));
+        rv.setAdapter(new LutemonFragmentListAdapter(view.getContext(), Storage.getInstance().getLutemonsAt(Location.SPA), this));
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         rv.setLayoutManager(layoutManager);
 

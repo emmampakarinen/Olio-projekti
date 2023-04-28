@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 
 public class HomeFragment extends Fragment {
-    private Storage LutemonStorage;
     private RecyclerView rv;
     private RecyclerView.Adapter adapter;
 
@@ -22,13 +21,12 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lutemon_home, container, false);
 
-        LutemonStorage = Storage.getInstance();
 
         rv = view.findViewById(R.id.rvLutemonsHomeFrag);
 
 
         rv.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        adapter = new LutemonFragmentListAdapter(view.getContext(), LutemonStorage.getHomeLutemons(), this);
+        adapter = new LutemonFragmentListAdapter(view.getContext(), Storage.getInstance().getLutemonsAt(Location.HOME), this);
         rv.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
         rv.setLayoutManager(layoutManager);

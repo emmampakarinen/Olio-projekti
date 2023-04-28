@@ -26,6 +26,9 @@
         <activity android:name=".BattleFieldActivity"
             android:exported="false"
             />
+        <activity android:name=".StatisticsActivity"
+            android:exported="false"
+            />
         <activity
             android:name=".MainActivity"
             android:exported="true">

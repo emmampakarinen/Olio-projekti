@@ -6,8 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class ListLutemonsActivity extends AppCompatActivity {
-    private Storage LutemonStorage;
     private RecyclerView rv;
 
     @Override
@@ -15,12 +16,11 @@ public class ListLutemonsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_lutemons);
 
-        LutemonStorage = Storage.getInstance();
 
         rv = findViewById(R.id.rvLutemonList);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new LutemonListAdapter(getApplicationContext(), LutemonStorage.getLutemons()));
+        rv.setAdapter(new LutemonListAdapter(getApplicationContext(), Storage.getInstance().getAllLutemons()));
 
     }
 

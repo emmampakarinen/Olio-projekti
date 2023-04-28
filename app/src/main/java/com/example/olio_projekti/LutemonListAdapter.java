@@ -1,6 +1,5 @@
 package com.example.olio_projekti;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -13,9 +12,9 @@ import java.util.HashMap;
 
 public class LutemonListAdapter extends RecyclerView.Adapter<com.example.olio_projekti.LutemonViewHolder> {
     private Context context;
-    private HashMap<Integer, Lutemon> lutemons = new HashMap<>();
+    private ArrayList<Lutemon> lutemons = new ArrayList<>();
 
-    public LutemonListAdapter (Context context, HashMap<Integer, Lutemon> lutemons) {
+    public LutemonListAdapter (Context context, ArrayList<Lutemon> lutemons) {
         this.lutemons = lutemons;
         this.context = context;
     }

@@ -34,4 +34,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    public void switchToStatistics(View view) {
+        Intent intent = new Intent(this, StatisticsActivity.class);
+        startActivity(intent);
+    }
+
+    public void saveLutemons(View view) {
+        Storage.getInstance().saveLutemons(this);
+    }
+
+    public void loadLutemons(View view) {
+        Storage.getInstance().loadLutemons(this);
+    }
+
 }

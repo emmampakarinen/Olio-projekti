@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class Lutemon implements Serializable {
     protected String name, color;
-    protected Integer attack, defense, experience, health, maxHealth, id, Lutcoin, photo;
+    protected Integer attack, defense, experience, health, maxHealth, id, Lutcoin, photo, wins = 0, losses = 0;
     private static Integer idCounter = 0;
     protected HashMap<String, Integer> gear = new HashMap<>();
 
@@ -66,11 +66,27 @@ public class Lutemon implements Serializable {
         return gear;
     }
 
-    public void defense(Lutemon lutemon) {
-        this.health =- (lutemon.getAttack() - this.defense);
+    public void defend(Lutemon lutemon) {
+        this.health -= (lutemon.getAttack() - this.defense);
     }
 
     public void setHealthToMax(Integer health) {
         this.health = health;
+    }
+
+    public void setWins(Integer wins) {
+        this.wins += wins;
+    }
+
+    public void setLosses(Integer losses) {
+        this.losses += losses;
+    }
+
+    public Integer getWins() {
+        return wins;
+    }
+
+    public Integer getLosses() {
+        return losses;
     }
 }

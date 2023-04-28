@@ -1,14 +1,17 @@
 package com.example.olio_projekti;
 
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class BattleField {
+public class BattleField extends Storage {
     private static BattleField bf = null;
     private static Lutemon fighter1, fighter2;
-    private static int rounds = 0;
+    private static Integer rounds = 0;
+    protected ArrayList<Lutemon> BattleLutemons = new ArrayList<>();
 
 
     private BattleField() {}
@@ -20,6 +23,17 @@ public class BattleField {
         return bf;
     }
 
+    public void addLutemon(Lutemon lutemon) {
+        BattleLutemons.add(lutemon);
+    }
+
+    public void leaveBattleField(Lutemon lutemon) {
+        BattleLutemons.remove(lutemon);
+    }
+
+    public ArrayList<Lutemon> getLutemons() {
+        return BattleLutemons;
+    }
 
 
     public void setFighters(Lutemon lutemon1, Lutemon lutemon2) {
@@ -35,42 +49,74 @@ public class BattleField {
         return fighter2;
     }
 
-    public String getStatistics() {
-        String stats = "Lutemon " + fighter1.getName() + "(" + fighter1.getColor() + "), health: " + fighter1.getHealth().toString() + ", attack: " + fighter1.getAttack().toString() + ", defense: " + fighter1.getDefense().toString() + "\n" + "Lutemon " + fighter2.getName() + "(" + fighter2.getColor() + "), health: " + fighter2.getHealth().toString() + ", attack: " + fighter2.getAttack().toString() + ", defense: " + fighter2.getDefense().toString() + "\n";
+    public String getFighterStatistics() {
+        String stats = "Lutemon " + fighter1.getName() + "(" + fighter1.getColor() + "), health: " + fighter1.getHealth().toString() + ", attack: " + fighter1.getAttack().toString() + ", defense: " + fighter1.getDefense().toString() + "\n" + "Lutemon " + fighter2.getName() + "(" + fighter2.getColor() + "), health: " + fighter2.getHealth().toString() + ", attack: " + fighter2.getAttack().toString() + ", defense: " + fighter2.getDefense().toString();
         return stats;
     }
 
-    public void fight(TextView tv) {
+    public ArrayList<JSONObject> fight() throws JSONException { // reference: https://www.tutorialspoint.com/json/json_java_example.htm
+        ArrayList<JSONObject> fightInfo = new ArrayList<>(); // saving fighting info and results to JSON format which helps with displayign the fight on screen at activity
+        rounds = 0;
+
         while (fighter1.getHealth() > 0 || fighter2.getHealth() > 0) {
-            tv.setText(getStatistics());
-            if (rounds%2 == 0) {
-                tv.setText("Lutemon " + fighter1.getName() + "("+ fighter1.getColor() + ")attacks.\n");
-                fighter2.defense(fighter1);
+            JSONObject fightRound = new JSONObject(); // this object has all information of one round
+            JSONArray fightText = new JSONArray(); // this array has all text info of the fight to be shown in the app
+
+            fightText.put(getFighterStatistics() + "\n");
+            if (rounds%2 == 0) { // determining which figfhter will start
+                fightRound.put("attacker", 1);
+                fightText.put("Lutemon " + fighter1.getName() + "("+ fighter1.getColor() + ") attacks." + "\n");
+                fighter2.defend(fighter1);
                 if (fighter2.getHealth() <= 0) {
-                    tv.setText("Lutemon " + fighter2.getName() + "("+ fighter2.getColor() + ") died, " + fighter1.getName() + "("+ fighter1.getColor() + ") won!\n");
+                    fightRound.put("winner", 1);
+                    fightText.put( "Lutemon " + fighter2.getName() + "("+ fighter2.getColor() + ") lost, " + fighter1.getName() + "("+ fighter1.getColor() + ") won!" + "\n");
                     fighter2.health = 0;
-                    fighter1.experience = fighter1.getExperience() + 1;
+                    fighter1.experience = fighter1.getExperience() + 2;
                     fighter1.attack = fighter1.getAttack() + 2;
+                    fightRound.put("fightTextArray", fightText);
+                    fightInfo.add(fightRound);
+
+                    // setting battle statistics
+                    fighter2.setLosses(1);
+                    fighter1.setWins(1);
                     break;
                 } else {
-                    tv.setText("Lutemon " + fighter2.getName() + "("+ fighter2.getColor() + ") defends the attack!\n");
+                    fightText.put("Lutemon " + fighter2.getName() + "("+ fighter2.getColor() + ") defends the attack!" + "\n");
+                    fightRound.put("winner", 0); // no winner if other lutemon defended the attack
                 }
             } else {
-                tv.setText("Lutemon " + fighter2.getName() + "("+ fighter2.getColor() + ") attacks.\n");
-                fighter1.defense(fighter2);
+                fightRound.put("attacker", 2);
+                fightText.put( "Lutemon " + fighter2.getName() + "("+ fighter2.getColor() + ") attacks." + "\n");
+                fighter1.defend(fighter2);
                 if (fighter1.getHealth() <= 0) {
-                    tv.setText("Lutemon " + fighter1.getName() + "("+ fighter1.getColor() + ") died, " + fighter2.getName() + "("+ fighter2.getColor() + ") won!\n");
-                    fighter1.health = 0;
-                    fighter2.experience = fighter2.getExperience() + 1;
+                    fightRound.put("winner", 2);
+                    fightText.put("Lutemon " + fighter1.getName() + "("+ fighter1.getColor() + ") lost, " + fighter2.getName() + "("+ fighter2.getColor() + ") won!" + "\n");
+                    fighter1.health = 0; // setting health to 0 before sending home since it cannot be negative in "real life"
+                    fighter2.experience = fighter2.getExperience() + 2;
                     fighter2.attack = fighter2.getAttack() + 2;
+                    fightRound.put("fightTextArray", fightText);
+                    fightInfo.add(fightRound);
+
+                    // setting battle statistics
+                    fighter1.setLosses(1);
+                    fighter2.setWins(1);
                     break;
                 } else {
-                    tv.setText("Lutemon " + fighter1.getName() + "("+ fighter1.getColor() + ") defends the attack!\n");
+                    fightText.put("Lutemon " + fighter1.getName() + "("+ fighter1.getColor() + ") defends the attack!" + "\n");
+                    fightRound.put("winner", 0); // no winner if other lutemon defended the attack
                 }
             }
+
+            fightRound.put("fightTextArray", fightText);
             rounds++;
+            fightRound.put("round", rounds);
+            fightInfo.add(fightRound);
         }
-        Storage.getInstance().moveToHome(fighter1);
-        Storage.getInstance().moveToHome(fighter2);
+
+        // sending both Lutemons back to home after the fight
+        Storage.getInstance().moveLutemon(Location.BATTLEFIELD, Location.HOME, fighter1);
+        Storage.getInstance().moveLutemon(Location.BATTLEFIELD, Location.HOME, fighter2);
+
+        return fightInfo;
     }
 }
