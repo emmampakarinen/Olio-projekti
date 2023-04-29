@@ -8,7 +8,6 @@ public class Lutemon implements Serializable {
     protected String name, color;
     protected Integer attack, defense, experience, health, maxHealth, id, Lutcoin, photo, wins = 0, losses = 0;
     private static Integer idCounter = 0;
-    protected HashMap<String, Integer> gear = new HashMap<>();
 
     public Lutemon(String name, String color, Integer attack, Integer defense, Integer maxHealth, Integer photo) {
         this.name = name;
@@ -20,7 +19,6 @@ public class Lutemon implements Serializable {
         this.maxHealth = maxHealth;
         Lutcoin = 0;
         id = idCounter;
-        gear = null;
         this.photo = photo;
         idCounter++;
     }
@@ -62,9 +60,6 @@ public class Lutemon implements Serializable {
         return photo;
     }
 
-    public HashMap<String, Integer> getGear() {
-        return gear;
-    }
 
     public void defend(Lutemon lutemon) {
         this.health -= (lutemon.getAttack() - this.defense);
@@ -89,4 +84,9 @@ public class Lutemon implements Serializable {
     public Integer getLosses() {
         return losses;
     }
+
+    public Integer getLutcoin() {
+        return Lutcoin;
+    }
+
 }

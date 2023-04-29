@@ -36,11 +36,6 @@ public class LutemonListAdapter extends RecyclerView.Adapter<com.example.olio_pr
         holder.color.setText("(" + lutemons.get(position).getColor() + ")");
         holder.photo.setImageResource(lutemons.get(position).getPhoto());
 
-        HashMap<String, Integer> additionalGear = lutemons.get(position).getGear();
-
-        if (additionalGear == null) {
-            holder.gearTitle.setText("No additional gear bought");
-        }
     }
 
     @Override

@@ -8,11 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,8 +35,8 @@ public class FightMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle_menu);
 
-        rv = findViewById(R.id.RecyclerViewFightMenu);
-        title = findViewById(R.id.textViewBattleMenuTitle);
+        rv = findViewById(R.id.RecyclerViewStoreMenu);
+        title = findViewById(R.id.textViewStoreTitle);
 
         lutemons = Storage.getInstance().getLutemonsAt(Location.BATTLEFIELD);
         rv.setLayoutManager(lm);
@@ -49,7 +46,7 @@ public class FightMenuActivity extends AppCompatActivity {
         lutemon1.setVisibility(View.GONE);
         lutemon2.setVisibility(View.GONE);
 
-        confirm = findViewById(R.id.btnConfirmFighters);
+        confirm = findViewById(R.id.btnConfirmBuying);
         toBattle = findViewById(R.id.btnFight);
 
         toBattle.setVisibility(View.GONE);
@@ -59,7 +56,7 @@ public class FightMenuActivity extends AppCompatActivity {
     }
 
 
-    private class CheckBoxAdapter extends RecyclerView.Adapter<FightMenuHolder> {
+    private class CheckBoxAdapter extends RecyclerView.Adapter<CheckBoxHolder> {
         private Context context;
         private ArrayList<Lutemon> lutemons;
         int checkedBoxes = 0;
@@ -72,12 +69,12 @@ public class FightMenuActivity extends AppCompatActivity {
 
         @NonNull
         @Override
-        public FightMenuHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new FightMenuHolder(LayoutInflater.from(context).inflate(R.layout.battlemenu_cb_view, parent, false));
+        public CheckBoxHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new CheckBoxHolder(LayoutInflater.from(context).inflate(R.layout.cb_view, parent, false));
         }
 
         @Override
-        public void onBindViewHolder(@NonNull FightMenuHolder holder, int position) {
+        public void onBindViewHolder(@NonNull CheckBoxHolder holder, int position) {
             pos = holder.getAdapterPosition();
 
             holder.cb.setText(lutemons.get(pos).getName() + " (" + lutemons.get(pos).getColor() + ")");
@@ -89,12 +86,12 @@ public class FightMenuActivity extends AppCompatActivity {
                 } else {
                     if (isChecked) {
                         checkedBoxes++;
-                        if (lutemon1.getVisibility() == View.GONE) {
+                        if (lutemon1.getVisibility() == View.GONE) { // setting the first character picture
                             lutemon1.setImageResource(lutemons.get(pos).getPhoto());
                             lutemon1.setVisibility(View.VISIBLE);
                             checked1 = holder.cb.getId();
                             fighter1 = lutemons.get(pos);
-                        } else if (lutemon2.getVisibility() == View.GONE) {
+                        } else if (lutemon2.getVisibility() == View.GONE) { // if the first is already selected then setting the second character picture
                             lutemon2.setImageResource(lutemons.get(pos).getPhoto());
                             lutemon2.setVisibility(View.VISIBLE);
                             checked2 = holder.cb.getId();
@@ -143,7 +140,7 @@ public class FightMenuActivity extends AppCompatActivity {
         lutemons.remove(fighter2);
     }
 
-    public void switchToBattleActivity(View view) {
+    public void switchToBattleActivity(View view) { // starting the battle activity
         Intent intent = new Intent(this, BattleFieldActivity.class);
         startActivity(intent);
     }

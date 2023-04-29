@@ -35,7 +35,7 @@ public class LutemonFragmentListAdapter extends RecyclerView.Adapter<com.example
 
     @Override
     public void onBindViewHolder(@NonNull LutemonFragmentViewHolder holder, int position) {
-        pos = holder.getAdapterPosition(); // tiedetään mikä lutemon kyseessä, jota halutaan siirtää
+        pos = holder.getAdapterPosition(); // to know which lutemon we want to move
 
         if (lutemons.get(pos) != null) {
             holder.name.setText(lutemons.get(pos).getName());
@@ -45,7 +45,7 @@ public class LutemonFragmentListAdapter extends RecyclerView.Adapter<com.example
             holder.exp.setText("Experience: " + lutemons.get(pos).getExperience().toString());
         }
 
-
+        // setting the button icons to correct places depending on which fragment is currently in use
         if (currentFragment instanceof HomeFragment) {
             holder.place1.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.baseline_sports_martial_arts_24, 0, 0, 0);
             holder.place2.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.baseline_spa_24, 0, 0, 0);
@@ -58,12 +58,14 @@ public class LutemonFragmentListAdapter extends RecyclerView.Adapter<com.example
         }
 
         holder.place1.setOnClickListener(view -> {
-            pos = holder.getAdapterPosition(); // tiedetään mikä lutemon kyseessä, jota halutaan siirtää
+            pos = holder.getAdapterPosition(); // to know which lutemon we want to move
+
+            // toasts for user information
             Toast toast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + " gained 1 experience and 1 attack points after training!", Toast.LENGTH_LONG);
-            Toast spaToast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + "  has full health after spa!", Toast.LENGTH_SHORT);
+            Toast spaToast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + " has full health after spa!", Toast.LENGTH_SHORT);
             Toast healthToast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + " needs to go to the spa first!", Toast.LENGTH_SHORT);
             if (currentFragment instanceof HomeFragment) {
-                if (lutemons.get(pos).getHealth() < lutemons.get(pos).getMaxHealth()) {
+                if (lutemons.get(pos).getHealth() < lutemons.get(pos).getMaxHealth()) { // if lutemon does not have enough health to go training
                     healthToast.show();
                 } else {
                     Storage.getInstance().moveLutemon(Location.HOME, Location.TRAINING, lutemons.get(pos));
@@ -82,9 +84,11 @@ public class LutemonFragmentListAdapter extends RecyclerView.Adapter<com.example
         });
 
         holder.place2.setOnClickListener(view -> {
-            pos = holder.getAdapterPosition(); // tiedetään mikä lutemon kyseessä, jota halutaan siirtää
-            Toast toast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + "  has full health, no need for spa!", Toast.LENGTH_SHORT);
-            Toast spaToast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + "  has full health after spa!", Toast.LENGTH_SHORT);
+            pos = holder.getAdapterPosition(); // to know which lutemon we want to move
+
+            // toasts for user information
+            Toast toast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + " has full health, no need for spa!", Toast.LENGTH_SHORT);
+            Toast spaToast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + " has full health after spa!", Toast.LENGTH_SHORT);
             if (currentFragment instanceof HomeFragment) {
                 if (lutemons.get(pos).getHealth() == lutemons.get(pos).getMaxHealth()) {
                     toast.show();

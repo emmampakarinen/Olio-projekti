@@ -69,7 +69,7 @@ public class BattleFieldActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (i < battle.size()) { // battle.size() = the number of rounds in the fight
-                    roundTextView.setText("ROUND: " + (i+1)); // printing the current round
+                    roundTextView.setText("ROUND " + (i+1)); // printing the current round
 
                     try {
                         if (battle.get(i).getInt("attacker") == 1) { // setting the battle info images for the attacker and defender of current round
@@ -112,13 +112,14 @@ public class BattleFieldActivity extends AppCompatActivity {
                                 } catch (InterruptedException e) {
                                     throw new RuntimeException(e);
                                 }
-                                handler.postDelayed(this, 3000);
+                                handler.postDelayed(this, 2500);
                             }
                         }
                     };
                     handler.post(nestedRunnable);
 
-                    handler.postDelayed(this, 9000);
+                    handler.postDelayed(this, 7500); /* 2500ms*3 = 7500, the delay doesn't finish until the nested
+                    runnable has finished showing battle text of the current round (every round text has 3 rows of text) */
                     i++;
                 } else {
                     try {

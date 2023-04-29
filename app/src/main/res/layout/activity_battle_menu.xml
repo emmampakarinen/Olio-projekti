@@ -10,16 +10,16 @@
 
 
     <TextView
-        android:id="@+id/textViewBattleMenuTitle"
+        android:id="@+id/textViewStoreTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="4dp"
-        android:text="Select two Lutemons to fight"
+        android:text="Choose two Lutemons to battle"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="30dp"
+        android:textSize="27dp"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RecyclerViewFightMenu"
+        android:id="@+id/RecyclerViewStoreMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -53,7 +53,7 @@
         app:layout_constraintVertical_bias="0.443" />
 
     <Button
-        android:id="@+id/btnConfirmFighters"
+        android:id="@+id/btnConfirmBuying"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

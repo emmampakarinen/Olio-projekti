@@ -79,18 +79,5 @@
             android:textColor="#000000"
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/textViewGearTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Gear bought"
-            android:textColor="@color/purple_700"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvGear"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
     </LinearLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

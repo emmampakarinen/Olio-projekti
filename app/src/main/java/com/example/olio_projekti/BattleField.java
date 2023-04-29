@@ -50,7 +50,7 @@ public class BattleField extends Storage {
     }
 
     public String getFighterStatistics() {
-        String stats = "Lutemon " + fighter1.getName() + "(" + fighter1.getColor() + "), health: " + fighter1.getHealth().toString() + ", attack: " + fighter1.getAttack().toString() + ", defense: " + fighter1.getDefense().toString() + "\n" + "Lutemon " + fighter2.getName() + "(" + fighter2.getColor() + "), health: " + fighter2.getHealth().toString() + ", attack: " + fighter2.getAttack().toString() + ", defense: " + fighter2.getDefense().toString();
+        String stats = "Lutemon " + fighter1.getName() + " (" + fighter1.getColor() + "), health: " + fighter1.getHealth().toString() + ", attack: " + fighter1.getAttack().toString() + ", defense: " + fighter1.getDefense().toString() + "\n" + "Lutemon " + fighter2.getName() + "(" + fighter2.getColor() + "), health: " + fighter2.getHealth().toString() + ", attack: " + fighter2.getAttack().toString() + ", defense: " + fighter2.getDefense().toString();
         return stats;
     }
 
@@ -65,14 +65,19 @@ public class BattleField extends Storage {
             fightText.put(getFighterStatistics() + "\n");
             if (rounds%2 == 0) { // determining which figfhter will start
                 fightRound.put("attacker", 1);
-                fightText.put("Lutemon " + fighter1.getName() + "("+ fighter1.getColor() + ") attacks." + "\n");
+                fightText.put("Lutemon " + fighter1.getName() + " ("+ fighter1.getColor() + ") attacks." + "\n");
                 fighter2.defend(fighter1);
                 if (fighter2.getHealth() <= 0) {
                     fightRound.put("winner", 1);
-                    fightText.put( "Lutemon " + fighter2.getName() + "("+ fighter2.getColor() + ") lost, " + fighter1.getName() + "("+ fighter1.getColor() + ") won!" + "\n");
+                    fightText.put( "Lutemon " + fighter2.getName() + " ("+ fighter2.getColor() + ") lost, " + fighter1.getName() + " ("+ fighter1.getColor() + ") won!" + "\n");
+
+                    /* Loser's health set to zero as it cannot be negative. Winner gets 2 experience points,
+                     2 attack points and 1 Lutcoin. */
                     fighter2.health = 0;
                     fighter1.experience = fighter1.getExperience() + 2;
                     fighter1.attack = fighter1.getAttack() + 2;
+                    fighter1.Lutcoin = fighter1.getLutcoin() + 1;
+
                     fightRound.put("fightTextArray", fightText);
                     fightInfo.add(fightRound);
 
@@ -81,19 +86,24 @@ public class BattleField extends Storage {
                     fighter1.setWins(1);
                     break;
                 } else {
-                    fightText.put("Lutemon " + fighter2.getName() + "("+ fighter2.getColor() + ") defends the attack!" + "\n");
+                    fightText.put("Lutemon " + fighter2.getName() + " ("+ fighter2.getColor() + ") defends the attack!" + "\n");
                     fightRound.put("winner", 0); // no winner if other lutemon defended the attack
                 }
             } else {
                 fightRound.put("attacker", 2);
-                fightText.put( "Lutemon " + fighter2.getName() + "("+ fighter2.getColor() + ") attacks." + "\n");
+                fightText.put( "Lutemon " + fighter2.getName() + " ("+ fighter2.getColor() + ") attacks." + "\n");
                 fighter1.defend(fighter2);
                 if (fighter1.getHealth() <= 0) {
                     fightRound.put("winner", 2);
-                    fightText.put("Lutemon " + fighter1.getName() + "("+ fighter1.getColor() + ") lost, " + fighter2.getName() + "("+ fighter2.getColor() + ") won!" + "\n");
+                    fightText.put("Lutemon " + fighter1.getName() + " ("+ fighter1.getColor() + ") lost, " + fighter2.getName() + " ("+ fighter2.getColor() + ") won!" + "\n");
+
+                    /* Loser's health set to zero as it cannot be negative. Winner gets 2 experience points,
+                     2 attack points and 1 Lutcoin. */
                     fighter1.health = 0; // setting health to 0 before sending home since it cannot be negative in "real life"
                     fighter2.experience = fighter2.getExperience() + 2;
                     fighter2.attack = fighter2.getAttack() + 2;
+                    fighter2.Lutcoin = fighter2.getLutcoin() + 1;
+
                     fightRound.put("fightTextArray", fightText);
                     fightInfo.add(fightRound);
 
@@ -102,7 +112,7 @@ public class BattleField extends Storage {
                     fighter2.setWins(1);
                     break;
                 } else {
-                    fightText.put("Lutemon " + fighter1.getName() + "("+ fighter1.getColor() + ") defends the attack!" + "\n");
+                    fightText.put("Lutemon " + fighter1.getName() + " ("+ fighter1.getColor() + ") defends the attack!" + "\n");
                     fightRound.put("winner", 0); // no winner if other lutemon defended the attack
                 }
             }

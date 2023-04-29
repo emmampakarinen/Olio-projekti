@@ -14,6 +14,7 @@ public class Spa extends Storage {
         return spa;
     }
 
+    // Lutemon's health goes to max after spaTreatment, method is called before leaving the spa
     private void spaTreatment(Lutemon lutemon) {
         lutemon.setHealthToMax(lutemon.getMaxHealth());
     }

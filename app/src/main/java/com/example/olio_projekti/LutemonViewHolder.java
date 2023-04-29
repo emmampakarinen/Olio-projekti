@@ -11,7 +11,7 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
 
     ImageView photo;
     TextView name, attack, defence, health, experience, color, gearTitle;
-    RecyclerView additionalGear;
+
 
     public LutemonViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -22,7 +22,5 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
         health = itemView.findViewById(R.id.textViewHealth);
         experience = itemView.findViewById(R.id.textViewExperience);
         color = itemView.findViewById(R.id.textViewColor);
-        additionalGear = itemView.findViewById(R.id.rvGear);
-        gearTitle = itemView.findViewById(R.id.textViewGearTitle);
     }
 }

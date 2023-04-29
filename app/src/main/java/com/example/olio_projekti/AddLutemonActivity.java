@@ -14,6 +14,8 @@ public class AddLutemonActivity extends AppCompatActivity {
     private Integer attack, defense, maxHealth, selected_photo;
     private RadioGroup rgLutemon;
     private Spinner spinner;
+
+    // images for each colored lutemon. User can choose from two pictures for Lutemon.
     private Integer pinkImages[] = {R.drawable.pinkcat1, R.drawable.pinkfrog};
     private Integer whiteImages[] = {R.drawable.whitelutemon1, R.drawable.whitelutemon2};
     private Integer greenImages[] = {R.drawable.greenlutemon1, R.drawable.greenlutemon2};
@@ -28,8 +30,8 @@ public class AddLutemonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_lutemon);
 
-        spinner = (Spinner) findViewById(R.id.spinnerLutemonPic);
-        rgLutemon = (RadioGroup) findViewById(R.id.rgLutemon);
+        spinner = findViewById(R.id.spinnerLutemonPic);
+        rgLutemon = findViewById(R.id.rgLutemon);
 
         TextView spinnertitle = findViewById(R.id.textViewSpinnerTitle);
         spinnertitle.setVisibility(View.GONE);
@@ -37,40 +39,38 @@ public class AddLutemonActivity extends AppCompatActivity {
 
         spinner.setPrompt("Choose a picture for the Lutemon");
 
-        rgLutemon.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        rgLutemon.setOnCheckedChangeListener((radioGroup, i) -> {
 
-                pos = rgLutemon.indexOfChild(findViewById(i));
-                spinnertitle.setVisibility(View.VISIBLE);
-                spinner.setVisibility(View.VISIBLE);
+            pos = rgLutemon.indexOfChild(findViewById(i));
+            spinnertitle.setVisibility(View.VISIBLE);
+            spinner.setVisibility(View.VISIBLE);
 
-                switch(pos) {
-                    case 0:
-                        adapter = new ImageArrayAdapter(getApplicationContext(), whiteImages);
-                        spinner.setAdapter(adapter);
-                        break;
-                    case 1:
-                        adapter = new ImageArrayAdapter(getApplicationContext(), greenImages);
-                        spinner.setAdapter(adapter);
-                        break;
-                    case 2:
-                        adapter = new ImageArrayAdapter(getApplicationContext(), pinkImages);
-                        spinner.setAdapter(adapter);
-                        break;
-                    case 3:
-                        adapter = new ImageArrayAdapter(getApplicationContext(), orangeImages);
-                        spinner.setAdapter(adapter);
-                        break;
-                    case 4:
-                        adapter = new ImageArrayAdapter(getApplicationContext(), blackImages);
-                        spinner.setAdapter(adapter);
-                        break;
-                }
+            switch(pos) {
+                case 0:
+                    adapter = new ImageArrayAdapter(getApplicationContext(), whiteImages);
+                    spinner.setAdapter(adapter);
+                    break;
+                case 1:
+                    adapter = new ImageArrayAdapter(getApplicationContext(), greenImages);
+                    spinner.setAdapter(adapter);
+                    break;
+                case 2:
+                    adapter = new ImageArrayAdapter(getApplicationContext(), pinkImages);
+                    spinner.setAdapter(adapter);
+                    break;
+                case 3:
+                    adapter = new ImageArrayAdapter(getApplicationContext(), orangeImages);
+                    spinner.setAdapter(adapter);
+                    break;
+                case 4:
+                    adapter = new ImageArrayAdapter(getApplicationContext(), blackImages);
+                    spinner.setAdapter(adapter);
+                    break;
             }
         });
     }
 
+    /* When creating a new Lutemon, it is put to home first via Storage instance. */
     public void addLutemon(View view) {
         EditText etName = findViewById(R.id.editTextName);
         name = etName.getText().toString();
@@ -92,7 +92,7 @@ public class AddLutemonActivity extends AppCompatActivity {
                         break;
                 }
 
-                Home.getInstance().createLutemon(new Black(name, color, attack, defense, maxHealth, selected_photo));
+                Storage.getInstance().addLutemonTo(Location.HOME, new Black(name, color, attack, defense, maxHealth, selected_photo));
                 break;
             case R.id.rbGreen:
                 color = "Green";
@@ -109,7 +109,7 @@ public class AddLutemonActivity extends AppCompatActivity {
                         break;
                 }
 
-                Home.getInstance().createLutemon(new Green(name, color, attack, defense, maxHealth, selected_photo));
+                Storage.getInstance().addLutemonTo(Location.HOME, new Green(name, color, attack, defense, maxHealth, selected_photo));
                 break;
             case R.id.rbPink:
                 color = "Pink";
@@ -126,7 +126,7 @@ public class AddLutemonActivity extends AppCompatActivity {
                         break;
                 }
 
-                Home.getInstance().createLutemon(new Pink(name, color, attack, defense, maxHealth, selected_photo));
+                Storage.getInstance().addLutemonTo(Location.HOME, new Pink(name, color, attack, defense, maxHealth, selected_photo));
                 break;
             case R.id.rbOrange:
                 color = "Orange";
@@ -143,7 +143,7 @@ public class AddLutemonActivity extends AppCompatActivity {
                         break;
                 }
 
-                Home.getInstance().createLutemon(new White(name, color, attack, defense, maxHealth, selected_photo));
+                Storage.getInstance().addLutemonTo(Location.HOME,new White(name, color, attack, defense, maxHealth, selected_photo));
                 break;
             case R.id.rbBlack:
                 color = "Black";

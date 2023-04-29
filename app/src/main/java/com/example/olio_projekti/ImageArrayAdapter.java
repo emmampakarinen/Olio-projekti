@@ -35,11 +35,6 @@ public class ImageArrayAdapter extends ArrayAdapter<Integer> {
         ImageView iv = view.findViewById(R.id.ivLutemonPic);
         iv.setImageResource(images[position]);
 
-        /*if (position == 0) {
-            iv.setVisibility(View.GONE);
-        } else {
-            iv.setVisibility(View.VISIBLE);
-        }*/
 
         return view;
     }

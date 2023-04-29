@@ -1,6 +1,5 @@
 package com.example.olio_projekti;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TrainingArea extends Storage{
@@ -8,8 +7,8 @@ public class TrainingArea extends Storage{
     private static TrainingArea ta = null;
 
     private void train(Lutemon lutemon) {
-        lutemon.attack += 2;
-        lutemon.experience += 2;
+        lutemon.attack += 1;
+        lutemon.experience += 1;
     }
 
     private TrainingArea() {}
