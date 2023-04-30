@@ -36,7 +36,10 @@
  jotka taistelevat, kunnes jomman kumman elämät vähenevät nollaan tai alle. Voittaja saa kokemus- ja hyökkäyspisteitä. Ohjelmaan on lisätty mahdollisuus tarkastella
  luotujen Lutemonien voitettuja/hävittyjä taisteluja visuaalisin keinoin. Ohjelman visuaaliseen näyttävyyteen on myös käytetty aikaa ja resursseja.  
    
- Etsin tietoa netistä, miten toteuttaa erilaisia toiminnallisuuksia työssä, kuten fragmentien luonti (loin fragmentit työhön ennen kuin ne tulivat
- kurssin materiaaleihin saataville, minkä takia toteutus eroaa hieman siitä mitä kurssilla opittiin). Työstä löytyy lähteet kommentoituna niistä kohdista, missä 
- ulkoisia lähteitä hyödynnettiin. Muutoin työssä on käytetty kurssilla jaettuja tietoja ja oppeja. 
+ Etsin tietoa netistä, miten toteuttaa erilaisia toiminnallisuuksia työssä, kuten fragmenttien luonti (loin fragmentit työhön ennen kuin ne tulivat
+ kurssin materiaaleihin saataville, minkä takia toteutus eroaa hieman siitä mitä kurssilla opittiin). Työstä löytyy lähteet kommentoituna niistä kohdista, joissa 
+ ulkoisia lähteitä hyödynnettiin. Muutoin työssä on käytetty kurssilla jaettuja tietoja ja oppeja.   
+   
+ ## Ohjelman demovideo (linkki) ##
+ https://youtu.be/MjJ3mDDnAck
     
