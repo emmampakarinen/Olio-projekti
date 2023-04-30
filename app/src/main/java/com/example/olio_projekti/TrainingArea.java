@@ -22,7 +22,7 @@ public class TrainingArea extends Storage{
 
 
     public void leaveTrainingArea(Lutemon lutemon) {
-        train(lutemon);
+        train(lutemon); // before leaving the area Lutemon is sent for training method
         TrainingLutemons.remove(lutemon);
     }
 

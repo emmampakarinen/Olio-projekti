@@ -2,7 +2,6 @@ package com.example.olio_projekti;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class FightMenuActivity extends AppCompatActivity {
-    private String hexColor = "#54E4EDEF";
-    private int color = Color.parseColor(hexColor);
+/* Menu activity is used before the actual battle. In this activity the user selects 2 fighters
+* from the battlefield to have a battle. */
+public class BattleMenuActivity extends AppCompatActivity {
     private ArrayList<Lutemon> lutemons;
     private RecyclerView rv;
     private ImageView lutemon1, lutemon2;
@@ -28,7 +27,7 @@ public class FightMenuActivity extends AppCompatActivity {
     private Button confirm, toBattle;
     private TextView title;
     private LinearLayoutManager lm = new LinearLayoutManager(this);
-    private View v;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +40,10 @@ public class FightMenuActivity extends AppCompatActivity {
         lutemons = Storage.getInstance().getLutemonsAt(Location.BATTLEFIELD);
         rv.setLayoutManager(lm);
         rv.setAdapter(new CheckBoxAdapter(lutemons, this));
+
         lutemon1 = findViewById(R.id.imageViewFighter1);
         lutemon2 = findViewById(R.id.imageViewFighter2);
+
         lutemon1.setVisibility(View.GONE);
         lutemon2.setVisibility(View.GONE);
 
@@ -55,7 +56,8 @@ public class FightMenuActivity extends AppCompatActivity {
         }
     }
 
-
+    /* Listing Lutemons for checkboxes was implemented with RecyclerView since we Don't know
+    * how many Lutemons have been created */
     private class CheckBoxAdapter extends RecyclerView.Adapter<CheckBoxHolder> {
         private Context context;
         private ArrayList<Lutemon> lutemons;

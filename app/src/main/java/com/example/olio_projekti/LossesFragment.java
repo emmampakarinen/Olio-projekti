@@ -25,6 +25,8 @@ public class LossesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // reference: https://github.com/AnyChart/AnyChart-Android/blob/master/sample/src/main/java/com/anychart/sample/charts/ColumnChartActivity.java
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_losses, container, false);
         AnyChartView anyChartView = view.findViewById(R.id.losses_chart_view);

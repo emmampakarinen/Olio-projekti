@@ -8,10 +8,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Storage {
-    protected String name;
     private static Storage s = null;
 
     protected Storage() {}
@@ -22,6 +20,10 @@ public class Storage {
         }
         return s;
     }
+
+    /* Moving, removing and getting lutemons in specific location is done through Storage instance,
+    * which is a singleton class. Location classes (home, spa etc.) are also singletons but they
+    * are only called through Storage. Enum 'Location' is used to know which location we are using. */
 
     public void addLutemonTo(Location location, Lutemon lutemon) {
         if (location == Location.HOME) {

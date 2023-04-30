@@ -21,7 +21,7 @@
             android:name=".MoveLutemonsActivity"
             android:exported="false"/>
         <activity
-            android:name="FightMenuActivity"
+            android:name=".BattleMenuActivity"
             android:exported="false"/>
         <activity android:name=".BattleFieldActivity"
             android:exported="false"
@@ -38,6 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

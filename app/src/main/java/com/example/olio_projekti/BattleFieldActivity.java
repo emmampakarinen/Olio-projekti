@@ -15,12 +15,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
 
 public class BattleFieldActivity extends AppCompatActivity {
     private ImageView f1, f2, f1_fightInfo, f2_fightInfo;
     private Button returnHome;
-    private TextView fightTextView, roundTextView;
+    private TextView fightTextView, roundTextView, health1, health2;
     private ArrayList<JSONObject> battle;
     private JSONArray fightTextArray = new JSONArray();
 
@@ -44,6 +43,11 @@ public class BattleFieldActivity extends AppCompatActivity {
 
         fightTextView = findViewById(R.id.textViewFight);
         roundTextView = findViewById(R.id.textViewRound);
+        health1 = findViewById(R.id.textViewHealth1);
+        health2 = findViewById(R.id.textViewHealth2);
+        health1.setVisibility(View.GONE);
+        health2.setVisibility(View.GONE);
+
         fightTextView.setSingleLine(false); // reference: https://stackoverflow.com/questions/16276241/textview-displaying-text-in-one-line-when-adding-rows-programatically-in-table-l
         try {
             battle = BattleField.getInstance().fight();
@@ -61,15 +65,22 @@ public class BattleFieldActivity extends AppCompatActivity {
     }
 
     public void setFightTextView() {
-        Handler handler = new Handler(); // https://stackoverflow.com/questions/40103742/update-textview-every-second-in-android
+        Handler handler = new Handler(); // reference: https://stackoverflow.com/questions/40103742/update-textview-every-second-in-android
 
         Runnable fightRunnable = new Runnable() { // runnable solutions for showing the fight text once in 3 seconds on the screen
             int i = 0; // index of the current "round" which will be displayed on the screen
-            Integer c = 1;
             @Override
             public void run() {
                 if (i < battle.size()) { // battle.size() = the number of rounds in the fight
                     roundTextView.setText("ROUND " + (i+1)); // printing the current round
+                    try {
+                        health1.setText("Health: " + battle.get(i).getString("health1"));
+                        health2.setText("Health: " + battle.get(i).getString("health2"));
+                        health1.setVisibility(View.VISIBLE);
+                        health2.setVisibility(View.VISIBLE);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
 
                     try {
                         if (battle.get(i).getInt("attacker") == 1) { // setting the battle info images for the attacker and defender of current round
@@ -91,10 +102,9 @@ public class BattleFieldActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
 
-
+                    // Showing the current round text
                     Runnable nestedRunnable = new Runnable() {
                         int counter = 0;
-                        CountDownLatch doneSignal = new CountDownLatch(1); // reference: https://developer.android.com/reference/java/util/concurrent/CountDownLatch.html
                         @Override
                         public void run() {
                             if (counter < fightTextArray.length()) {
@@ -104,21 +114,16 @@ public class BattleFieldActivity extends AppCompatActivity {
                                     throw new RuntimeException(e);
                                 }
                                 counter++;
-                                doneSignal.countDown();
+                                //doneSignal.countDown();
                             }
                             if (counter < fightTextArray.length()) {
-                                try {
-                                    doneSignal.await();
-                                } catch (InterruptedException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                handler.postDelayed(this, 2500);
+                                handler.postDelayed(this, 2750);
                             }
                         }
                     };
                     handler.post(nestedRunnable);
 
-                    handler.postDelayed(this, 7500); /* 2500ms*3 = 7500, the delay doesn't finish until the nested
+                    handler.postDelayed(this, 8250); /* 2750ms*3 = 8250, the delay doesn't finish until the nested
                     runnable has finished showing battle text of the current round (every round text has 3 rows of text) */
                     i++;
                 } else {
@@ -135,7 +140,10 @@ public class BattleFieldActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
+                    health1.setVisibility(View.GONE);
+                    health2.setVisibility(View.GONE);
                     returnHome.setVisibility(View.VISIBLE);
+                    roundTextView.setText("Battle ended!");
                 }
             }
         };

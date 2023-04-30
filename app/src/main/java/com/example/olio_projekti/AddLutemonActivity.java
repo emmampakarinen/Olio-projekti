@@ -39,6 +39,7 @@ public class AddLutemonActivity extends AppCompatActivity {
 
         spinner.setPrompt("Choose a picture for the Lutemon");
 
+        /* The spinner pictures are changed according to selected Lutemon color */
         rgLutemon.setOnCheckedChangeListener((radioGroup, i) -> {
 
             pos = rgLutemon.indexOfChild(findViewById(i));

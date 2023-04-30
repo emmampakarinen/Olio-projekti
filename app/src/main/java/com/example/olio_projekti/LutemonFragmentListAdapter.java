@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class LutemonFragmentListAdapter extends RecyclerView.Adapter<com.example.olio_projekti.LutemonFragmentViewHolder> {
     // reference for fragments: https://www.youtube.com/watch?v=tPV8xA7m-iw&t=603s
+
     Context context;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
     private Fragment currentFragment;
@@ -64,8 +65,9 @@ public class LutemonFragmentListAdapter extends RecyclerView.Adapter<com.example
             Toast toast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + " gained 1 experience and 1 attack points after training!", Toast.LENGTH_LONG);
             Toast spaToast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + " has full health after spa!", Toast.LENGTH_SHORT);
             Toast healthToast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + " needs to go to the spa first!", Toast.LENGTH_SHORT);
+
             if (currentFragment instanceof HomeFragment) {
-                if (lutemons.get(pos).getHealth() < lutemons.get(pos).getMaxHealth()) { // if lutemon does not have enough health to go training
+                if (lutemons.get(pos).getHealth() < lutemons.get(pos).getMaxHealth()) { // if lutemon does not have enough health to go training it won't be moved
                     healthToast.show();
                 } else {
                     Storage.getInstance().moveLutemon(Location.HOME, Location.TRAINING, lutemons.get(pos));
@@ -89,6 +91,7 @@ public class LutemonFragmentListAdapter extends RecyclerView.Adapter<com.example
             // toasts for user information
             Toast toast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + " has full health, no need for spa!", Toast.LENGTH_SHORT);
             Toast spaToast = Toast.makeText(context, "Lutemon " + lutemons.get(pos).getName() + " has full health after spa!", Toast.LENGTH_SHORT);
+
             if (currentFragment instanceof HomeFragment) {
                 if (lutemons.get(pos).getHealth() == lutemons.get(pos).getMaxHealth()) {
                     toast.show();
@@ -112,6 +115,9 @@ public class LutemonFragmentListAdapter extends RecyclerView.Adapter<com.example
             }
         });
 
+        /* Lutemon can be moved to battlefield only from home. This was implemented this way because Home doesn't have
+        * any activities for Lutemons (such as training or spa treatments) which is why I though it would make the most
+        * sense to do it this way. */
         holder.readyToFight.setVisibility(View.GONE);
         if (currentFragment instanceof HomeFragment) {
             holder.readyToFight.setVisibility(View.VISIBLE);

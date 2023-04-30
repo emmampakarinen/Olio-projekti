@@ -7,12 +7,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/* This holder is for listing all lutemons */
 public class LutemonViewHolder extends RecyclerView.ViewHolder {
 
     ImageView photo;
-    TextView name, attack, defence, health, experience, color, gearTitle;
-
-
+    TextView name, attack, defence, health, experience, color;
     public LutemonViewHolder(@NonNull View itemView) {
         super(itemView);
         photo = itemView.findViewById(R.id.imageViewLutemon);

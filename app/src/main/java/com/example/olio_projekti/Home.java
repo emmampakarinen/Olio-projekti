@@ -15,10 +15,8 @@ public class Home extends Storage {
         return home;
     }
 
-    public void createLutemon(Lutemon lutemon) {
-        this.addLutemon(lutemon);
-    }
-
+    /* createLutemon() class was redundant due to addLutemon method in this class, so it
+     was removed. */
     public void addLutemon(Lutemon lutemon) {
         HomeLutemons.add(lutemon);
     }

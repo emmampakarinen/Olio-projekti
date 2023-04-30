@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void switchToFightMenu(View view) {
-        Intent intent = new Intent(this, FightMenuActivity.class);
+        Intent intent = new Intent(this, BattleMenuActivity.class);
         startActivity(intent);
     }
 

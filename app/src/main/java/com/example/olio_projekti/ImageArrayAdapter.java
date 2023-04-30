@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
+/* Class is used for AddLutemonActivity to list images for lutemons */
 public class ImageArrayAdapter extends ArrayAdapter<Integer> {
     private Context context;
     private Integer[] images;

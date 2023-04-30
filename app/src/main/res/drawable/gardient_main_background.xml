@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?> <!-- reference: https://www.studytonight.com/post/gradient-drawable-in-android-create-gradient-backgrounds?utm_content=cmp-true-->
+<shape
+    android:shape = "rectangle"
+    xmlns:android = "http://schemas.android.com/apk/res/android" >
+
+    <gradient
+        android:startColor = "#F75662"
+        android:endColor = "#9252f5"
+        android:type = "linear" />
+</shape>

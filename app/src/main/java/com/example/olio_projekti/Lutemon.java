@@ -6,8 +6,8 @@ import java.util.HashMap;
 
 public class Lutemon implements Serializable {
     protected String name, color;
-    protected Integer attack, defense, experience, health, maxHealth, id, Lutcoin, photo, wins = 0, losses = 0;
-    private static Integer idCounter = 0;
+    protected Integer attack, defense, experience, health, maxHealth, id, photo, wins = 0, losses = 0;
+
 
     public Lutemon(String name, String color, Integer attack, Integer defense, Integer maxHealth, Integer photo) {
         this.name = name;
@@ -17,10 +17,7 @@ public class Lutemon implements Serializable {
         experience = 0;
         this.health = maxHealth;
         this.maxHealth = maxHealth;
-        Lutcoin = 0;
-        id = idCounter;
         this.photo = photo;
-        idCounter++;
     }
 
 
@@ -85,8 +82,5 @@ public class Lutemon implements Serializable {
         return losses;
     }
 
-    public Integer getLutcoin() {
-        return Lutcoin;
-    }
 
 }

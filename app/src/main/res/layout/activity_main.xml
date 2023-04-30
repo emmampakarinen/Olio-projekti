@@ -4,20 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <Button
-        android:id="@+id/btnBattlefield"
-        android:layout_width="217dp"
-        android:layout_height="80dp"
-        android:onClick="switchToFightMenu"
-        android:text="Enter battlefield"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695" />
+    tools:context=".MainActivity"
+    android:background="@drawable/gardient_main_background">
 
     <Button
         android:id="@+id/btnMoveLutemons"
@@ -25,6 +13,7 @@
         android:layout_height="80dp"
         android:onClick="switchToMoveLutemons"
         android:text="Move Lutemons"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
@@ -38,6 +27,7 @@
         android:layout_height="80dp"
         android:onClick="switchToListLutemons"
         android:text="List all Lutemons"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
@@ -94,11 +84,29 @@
         android:layout_height="81dp"
         android:onClick="switchToAddNewLutemon"
         android:text="Add new Lutemon"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.033" />
+
+    <Button
+        android:id="@+id/btnBattlefield"
+        android:layout_width="217dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#000000"
+        android:fontFamily="@font/nosifer"
+        android:onClick="switchToFightMenu"
+        android:text="Battlefield"
+        android:textColor="#FF0000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.685" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
