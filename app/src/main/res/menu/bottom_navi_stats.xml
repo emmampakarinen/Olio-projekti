@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/wins"
+        android:enabled="true"
+        android:icon="@drawable/outline_win"
+        android:title="Wins"
+        />
+    <item
+        android:id="@+id/losses"
+        android:enabled="true"
+        android:icon="@drawable/outline_lost"
+        android:title="Losses"
+        />
+
+
+</menu>
