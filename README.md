@@ -23,7 +23,7 @@
   * Fragmentteja hyödynnetty lokaatioissa sekä tilastojen näyttämisessä
 * Tietojen tallennus ja lataus 
 * Omat lisätyt ominaisuudet
-  * Spa -ominaisuus
+  * Spa -ominaisuus (2p)
     * Spa on merkattu yhdeksi lokaatioista. Spa:ssa on metodi, jossa Lutemon saa elämänsä täyteen.
     * Lutemon ei myöskään voi treenata tai mennä taisteluun ellei sen elämät ole täynnä. Jos Lutemonia yrittää siirtää, kun sen elämät ei ole täynnä, 
     käyttäjälle tulee Toast-ilmoitus, jossa kehotetaan käyttämään Lutemonia Spa:ssa
