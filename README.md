@@ -1,5 +1,9 @@
 # Olio-ohjelmointi harjoitustyöprojekti 2023
 
+## Short description in english: ##
+This is an Object-Oriented Programming (OOP) school project developed in Java. I created a simple game featuring Pokémon-like characters where users can create, move, and make them fight each other. The game includes various functionalities such as a visualized battle system, statistics tracking, and additional features like a "Spa" location for healing characters after battles.
+* Demo:  https://youtu.be/MjJ3mDDnAck
+
 ## Luokkakaavio ##
 
 ![image](https://user-images.githubusercontent.com/118518912/235314408-47a01612-5f5a-42b3-8fbf-9d8e5606ed73.png)
